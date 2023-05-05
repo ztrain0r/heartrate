@@ -15,12 +15,12 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => WelcomePage(),
         '/healthy': (context) => HealthyHeartPage(),
-        '/unhealthy': (context) => UnhealthyHeartPage(),
+        '/unhealthyHigh': (context) => UnhealthyHeartPageHigh(),
+        '/unhealthyLow': (context) => UnhealthyHeartPageLow(),
       },
     );
   }
 }
-
 
 class WelcomePage extends StatelessWidget {
   Future<int?> _readHeartRateFromFile() async {
@@ -33,8 +33,10 @@ class WelcomePage extends StatelessWidget {
     if (heartRate != null) {
       if (heartRate >= 60 && heartRate <= 100) {
         Navigator.pushNamed(context, '/healthy', arguments: heartRate);
+      } else if (heartRate < 60) {
+        Navigator.pushNamed(context, '/unhealthyLow', arguments: heartRate);
       } else {
-        Navigator.pushNamed(context, '/unhealthy', arguments: heartRate);
+        Navigator.pushNamed(context, '/unhealthyHigh', arguments: heartRate);
       }
     } else {
       showDialog(
@@ -55,18 +57,66 @@ class WelcomePage extends StatelessWidget {
     }
   }
 
+
+  // use this controller to get what the user is typing
+  final _textController = TextEditingController();
+
+  //store user age from input (as string)
+  String sAge = '';  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Heart Rate Monitor'),
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () => _handleStartButtonPressed(context),
-          child: Text('Click Here to Start'),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+            child: Container(
+              child: Center(
+                child: Text('To determine a healthy heart rate, enter your age:', style: TextStyle(fontSize: 15)),
+                ),
+            ),
+            ),
+            // Expanded(child: Container(
+            //   child: Center(
+            //     child: Text('App'),
+            //     ),
+            // ),
+            // ),
+          TextField(
+            controller: _textController,
+            decoration: InputDecoration(
+              hintText: 'Enter your age',
+              border: const OutlineInputBorder(),
+              suffixIcon: 
+                IconButton(
+                  onPressed: () {
+                    // clear whats in text field
+                    _textController.clear();
+                  }, 
+                icon: Icon(Icons.clear)
+                ),
+              ),
+          ),
+          MaterialButton(
+            onPressed: () => _handleStartButtonPressed(context),
+            color: Colors.blue,
+            child: Text('Enter', style: TextStyle(color: Colors.white)),
+          ),
+        ],
         ),
       ),
+      // body: Center(
+      //   child: ElevatedButton(
+      //     onPressed: () => _handleStartButtonPressed(context),
+      //     child: Text('Click Here to Start'),
+      //   ),
+      //),
     );
   }
 }
@@ -83,7 +133,7 @@ class HealthyHeartPage extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Your heart rate is $heartRate bpm'),
+            Text('Your heart rate is $heartRate bpm', style: TextStyle(color: Colors.green, fontSize: 25),),
             SizedBox(height: 16.0),
             Text('Your heart rate is healthy!'),
             SizedBox(height: 16.0),
@@ -98,21 +148,52 @@ class HealthyHeartPage extends StatelessWidget {
   }
 }
 
-class UnhealthyHeartPage extends StatelessWidget {
+class UnhealthyHeartPageHigh extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final int heartRate = ModalRoute.of(context)?.settings.arguments as int;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Unhealthy Heart'),
+        title: Text('High Heart Rate!'),
       ),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Your heart rate is $heartRate bpm'),
+            Text('Your heart rate is $heartRate bpm!',  style: TextStyle(color: Colors.red, fontSize: 25),),
+            Text('Your heart rate is too high. Here are some tips to lower it:'),
+            SizedBox(height: 8.0),
+            Text('- Exercise regularly'),
+            Text('- Eat a healthy diet. Avoid caffeine and salt.'),
+            Text('- Manage stress. Try and take a deep breath!'),
+            Text('- Get enough sleep'),
+            Text('- Drink plenty of water.'),
             SizedBox(height: 16.0),
-            Text('Your heart rate is not healthy. Here are some tips:'),
+            ElevatedButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Back'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class UnhealthyHeartPageLow extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final int heartRate = ModalRoute.of(context)?.settings.arguments as int;
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Low Heart Rate!'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text('Your heart rate is $heartRate bpm!',  style: TextStyle(color: Colors.red, fontSize: 25),),
+            Text('Your heart rate is too low. Here are some tips to increase your heartrate:'),
             SizedBox(height: 8.0),
             Text('- Exercise regularly'),
             Text('- Eat a healthy diet'),
