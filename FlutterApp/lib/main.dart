@@ -88,13 +88,18 @@ class WelcomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
+            child: Center (child: Image.asset('assets/heart.jpeg', height:200, width: 200),
+            ),
+            ),
+            SizedBox(height: 100.0),
+            Container(
             child: Container(
               child: Center(
                 child: Text('To determine a healthy heart rate, enter your age:', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
                 ),
             ),
             ),
-            SizedBox(height: 20.0),
+            SizedBox(height: 10.0),
           TextField(
             controller: _textController,
             decoration: InputDecoration(
