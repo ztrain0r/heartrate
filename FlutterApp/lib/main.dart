@@ -1,5 +1,6 @@
 import 'dart:ffi';
 import 'dart:io';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -28,15 +29,26 @@ class WelcomePage extends StatelessWidget {
     return int.tryParse(contents);
   }
 
-  void _handleStartButtonPressed(BuildContext context) async {
+  void _handleStartButtonPressed(BuildContext context, var sAge) async {
+    var age = int.parse(sAge);
     final heartRate = await _readHeartRateFromFile();
     if (heartRate != null) {
-      if (heartRate >= 60 && heartRate <= 100) {
-        Navigator.pushNamed(context, '/healthy', arguments: heartRate);
-      } else if (heartRate < 60) {
-        Navigator.pushNamed(context, '/unhealthyLow', arguments: heartRate);
-      } else {
-        Navigator.pushNamed(context, '/unhealthyHigh', arguments: heartRate);
+      if (age < 10) { // FOR AGES 9 AND BELOW
+        if (heartRate < 75) {
+          Navigator.pushNamed(context, '/unhealthyLow', arguments: heartRate);
+        } else if (heartRate > 120) {
+          Navigator.pushNamed(context, '/unhealthyHigh', arguments: heartRate);
+        } else {
+          Navigator.pushNamed(context, '/healthy', arguments: heartRate);
+        }
+      } else if (age >= 10) { // AGES 10 AND UP
+        if (heartRate < 60) {
+          Navigator.pushNamed(context, '/unhealthyLow', arguments: heartRate);
+        } else if (heartRate > 110) {
+          Navigator.pushNamed(context, '/unhealthyHigh', arguments: heartRate);
+        } else {
+          Navigator.pushNamed(context, '/healthy', arguments: heartRate);
+        }
       }
     } else {
       showDialog(
@@ -78,16 +90,11 @@ class WelcomePage extends StatelessWidget {
             Container(
             child: Container(
               child: Center(
-                child: Text('To determine a healthy heart rate, enter your age:', style: TextStyle(fontSize: 15)),
+                child: Text('To determine a healthy heart rate, enter your age:', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
                 ),
             ),
             ),
-            // Expanded(child: Container(
-            //   child: Center(
-            //     child: Text('App'),
-            //     ),
-            // ),
-            // ),
+            SizedBox(height: 20.0),
           TextField(
             controller: _textController,
             decoration: InputDecoration(
@@ -104,19 +111,13 @@ class WelcomePage extends StatelessWidget {
               ),
           ),
           MaterialButton(
-            onPressed: () => _handleStartButtonPressed(context),
+            onPressed: () =>  _handleStartButtonPressed(context, _textController.text),
             color: Colors.blue,
             child: Text('Enter', style: TextStyle(color: Colors.white)),
           ),
         ],
         ),
       ),
-      // body: Center(
-      //   child: ElevatedButton(
-      //     onPressed: () => _handleStartButtonPressed(context),
-      //     child: Text('Click Here to Start'),
-      //   ),
-      //),
     );
   }
 }
@@ -160,11 +161,11 @@ class UnhealthyHeartPageHigh extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Your heart rate is $heartRate bpm!',  style: TextStyle(color: Colors.red, fontSize: 25),),
-            Text('Your heart rate is too high. Here are some tips to lower it:'),
+            Text('Your heart rate is $heartRate bpm!',  style: TextStyle(color: Colors.red, fontSize: 25, fontWeight: FontWeight.bold),),
+            Text('Your heart rate is too high for your age. Here are some tips to lower it:', textAlign: TextAlign.end,),
             SizedBox(height: 8.0),
             Text('- Exercise regularly'),
-            Text('- Eat a healthy diet. Avoid caffeine and salt.'),
+            Text('- Eat healthy. Avoid caffeine and salt.'),
             Text('- Manage stress. Try and take a deep breath!'),
             Text('- Get enough sleep'),
             Text('- Drink plenty of water.'),
@@ -192,8 +193,8 @@ class UnhealthyHeartPageLow extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Your heart rate is $heartRate bpm!',  style: TextStyle(color: Colors.red, fontSize: 25),),
-            Text('Your heart rate is too low. Here are some tips to increase your heartrate:'),
+            Text('Your heart rate is $heartRate bpm!',  style: TextStyle(color: Colors.red, fontSize: 25, fontWeight: FontWeight.bold),),
+            Text('Your heart rate is too low for your age. Here are some tips to increase your heartrate:', textAlign: TextAlign.center,),
             SizedBox(height: 8.0),
             Text('- Exercise regularly'),
             Text('- Eat a healthy diet'),
