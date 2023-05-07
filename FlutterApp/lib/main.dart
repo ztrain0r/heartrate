@@ -134,7 +134,7 @@ class HealthyHeartPage extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Your heart rate is $heartRate bpm', style: TextStyle(color: Colors.green, fontSize: 25),),
+            Text('Your heart rate is $heartRate bpm', style: TextStyle(color: Colors.green, fontSize: 25, fontWeight: FontWeight.bold),),
             SizedBox(height: 16.0),
             Text('Your heart rate is healthy!'),
             SizedBox(height: 16.0),
@@ -162,7 +162,7 @@ class UnhealthyHeartPageHigh extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text('Your heart rate is $heartRate bpm!',  style: TextStyle(color: Colors.red, fontSize: 25, fontWeight: FontWeight.bold),),
-            Text('Your heart rate is too high for your age. Here are some tips to lower it:', textAlign: TextAlign.end,),
+            Text('Your heart rate is too high for your age. Here are some tips to lower it:', textAlign: TextAlign.center,),
             SizedBox(height: 8.0),
             Text('- Exercise regularly'),
             Text('- Eat healthy. Avoid caffeine and salt.'),
