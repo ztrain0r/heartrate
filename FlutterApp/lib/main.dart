@@ -202,7 +202,7 @@ class UnhealthyHeartPageLow extends StatelessWidget {
             Text('Your heart rate is too low for your age. Here are some tips to increase your heartrate:', textAlign: TextAlign.center,),
             SizedBox(height: 8.0),
             Text('- Exercise regularly'),
-            Text('- Eat a healthy diet'),
+            Text('- Drink more caffine and eat more salt!'),
             Text('- Manage stress'),
             Text('- Get enough sleep'),
             SizedBox(height: 16.0),
