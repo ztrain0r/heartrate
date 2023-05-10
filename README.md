@@ -61,6 +61,6 @@
 <li>Navigate to the FlutterApp folder and run <code>flutter run</code> on the folder. The app should then run on a simulator of your choice and display the heart rate read from the ESP32.</li>
 </ol>
 
-<p>What the app looks like:
+<p>What the app looks like:</p>
 <img src="https://media.discordapp.net/attachments/833554069070938116/1105701131155406878/image.png?width=508&amp;height=1056" alt="">
-<img src="https://media.discordapp.net/attachments/833554069070938116/1105701176617476159/image.png?width=490&amp;height=1056" alt=""></p>
+<img src="https://media.discordapp.net/attachments/833554069070938116/1105701176617476159/image.png?width=490&amp;height=1056" alt="">
