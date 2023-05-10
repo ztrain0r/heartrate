@@ -4,14 +4,14 @@
 
 <h2 id="toc_1">1. Setting Up ESP32 Software</h2>
 
-<p>Files needed to use your ESP32 will be located in the <code>Heart Monitor</code> file.</p>
+<p>Files needed to use your ESP32 will be located in the <code>ESP32Monitor</code> file.</p>
 
 <ol>
 <li>First, you will need to get two <a href="https://my.atsign.com/dashboard">AtSign Keys</a>, one to send data and one to receive data.</li>
-<li>Download the PlatformIO extension on VS Code. Open a new PlatformIO project with the <code>Heart Monitor</code> folder. </li>
-<li>In the <code>Heart Monitor/include/constants.h</code>, add your Wifi name and password. </li>
-<li>Put your two AtSign key files in <code>Heart Monitor/data</code>.</li>
-<li>Edit <code>Heart Monitor/src/main.cpp</code> to your two AtSigns: one that represents your ESP32 and one that represents the app.</li>
+<li>Download the PlatformIO extension on VS Code. Open a new PlatformIO project with the <code>ESP32Monitor</code> folder. </li>
+<li>In the <code>ESP32Monitor/include/constants.h</code>, add your Wifi name and password. </li>
+<li>Put your two AtSign key files in <code>ESP32Monitor/data</code>.</li>
+<li>Edit <code>ESP32Monitor/src/main.cpp</code> to your two AtSigns: one that represents your ESP32 and one that represents the app.</li>
 </ol>
 
 <h2 id="toc_2">2. Setting up ESP32 Hardware</h2>
