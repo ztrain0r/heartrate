@@ -10,17 +10,17 @@ public class App
 {
     public static void main( String[] args ) throws Exception
     {
-        AtSign java = new AtSign("@bittersweet8");
-        AtSign esp32 = new AtSign("@the60melted");
+        AtSign java = new AtSign("@"); // RECEIVING ATSIGN
+        AtSign esp32 = new AtSign("@"); // SENDING (ESP32) ATSIGN
 
         AtClient atClient = AtClient.withRemoteSecondary("root.atsign.org:64", java);
 
         SharedKey sharedKey = new KeyBuilders.SharedKeyBuilder(esp32, java).key("heartrate").build();
 
-        String data = atClient.get(sharedKey).get();
-        PrintWriter writer = new PrintWriter("heartrate.txt", "UTF-8");
-        writer.println(data);
+        String data = atClient.get(sharedKey).get(); // get the heartrate sent from the ESP32
+        PrintWriter writer = new PrintWriter("heartrate.txt", "UTF-8"); // output a file
+        writer.println(data); // writes to new file outputting heartrate (just a number)
         writer.close();
-        System.out.println("Heart rate: " + data + "bpm");
+        System.out.println("Heart rate: " + data + "bpm"); // prints heartrate to terminal (testing purposes)
     }
 }

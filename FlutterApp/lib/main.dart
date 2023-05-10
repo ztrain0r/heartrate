@@ -14,10 +14,10 @@ class MyApp extends StatelessWidget {
       title: 'Heart Rate App',
       initialRoute: '/',
       routes: {
-        '/': (context) => WelcomePage(),
-        '/healthy': (context) => HealthyHeartPage(),
-        '/unhealthyHigh': (context) => UnhealthyHeartPageHigh(),
-        '/unhealthyLow': (context) => UnhealthyHeartPageLow(),
+        '/': (context) => WelcomePage(), // landing page, enter age
+        '/healthy': (context) => HealthyHeartPage(), // healthy heart rate
+        '/unhealthyHigh': (context) => UnhealthyHeartPageHigh(), // high heart rate
+        '/unhealthyLow': (context) => UnhealthyHeartPageLow(), // low heart rate
       },
     );
   }
@@ -25,13 +25,13 @@ class MyApp extends StatelessWidget {
 
 class WelcomePage extends StatelessWidget {
   Future<int?> _readHeartRateFromFile() async {
-    String contents = File("/Users/zach/receiving_demo/javadata/heartrate.txt").readAsStringSync();
-    return int.tryParse(contents);
+    String contents = File("PATH TO .TXT OUTPUT FILE").readAsStringSync(); // read heartrate.txt file as string
+    return int.tryParse(contents); // convert read string into int
   }
 
   void _handleStartButtonPressed(BuildContext context, var sAge) async {
-    var age = int.parse(sAge);
-    final heartRate = await _readHeartRateFromFile();
+    var age = int.parse(sAge); // convert entered age to int
+    final heartRate = await _readHeartRateFromFile(); // get the heartrate (int) from the read file function
     if (heartRate != null) {
       if (age < 10) { // FOR AGES 9 AND BELOW
         if (heartRate < 75) {
@@ -50,7 +50,7 @@ class WelcomePage extends StatelessWidget {
           Navigator.pushNamed(context, '/healthy', arguments: heartRate);
         }
       }
-    } else {
+    } else { // no heart rate is read, ERROR
       showDialog(
         context: context,
         builder: (context) {
@@ -73,8 +73,7 @@ class WelcomePage extends StatelessWidget {
   // use this controller to get what the user is typing
   final _textController = TextEditingController();
 
-  //store user age from input (as string)
-  String sAge = '';  
+  // store user age from input (as string)  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -116,7 +115,7 @@ class WelcomePage extends StatelessWidget {
               ),
           ),
           MaterialButton(
-            onPressed: () =>  _handleStartButtonPressed(context, _textController.text),
+            onPressed: () =>  _handleStartButtonPressed(context, _textController.text), // when button pressed, send the entered age to the function
             color: Colors.blue,
             child: Text('Enter', style: TextStyle(color: Colors.white)),
           ),
