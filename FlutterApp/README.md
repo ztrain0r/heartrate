@@ -1,3 +1,3 @@
-# HeartRate
+# HeartRate App
 
-Heart Rate Monitor project.
+This folder contains the Flutter App and the necessary files to run the application.
