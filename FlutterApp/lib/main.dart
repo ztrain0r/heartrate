@@ -34,23 +34,23 @@ class WelcomePage extends StatelessWidget {
     final heartRate = await _readHeartRateFromFile(); // get the heartrate (int) from the read file function
     if (heartRate != null) {
       if (age < 10) { // FOR AGES 9 AND BELOW
-        if (heartRate < 75) {
+        if (heartRate < 75) { // this means the heartrate is low (by 9 year old and below standards)
           Navigator.pushNamed(context, '/unhealthyLow', arguments: heartRate);
-        } else if (heartRate > 120) {
+        } else if (heartRate > 120) { // heartrate is high
           Navigator.pushNamed(context, '/unhealthyHigh', arguments: heartRate);
-        } else {
+        } else { // else heartrate is good
           Navigator.pushNamed(context, '/healthy', arguments: heartRate);
         }
       } else if (age >= 10) { // AGES 10 AND UP
-        if (heartRate < 60) {
+        if (heartRate < 60) { // heartrate is low
           Navigator.pushNamed(context, '/unhealthyLow', arguments: heartRate);
-        } else if (heartRate > 110) {
-          Navigator.pushNamed(context, '/unhealthyHigh', arguments: heartRate);
-        } else {
+        } else if (heartRate > 110) { // heartrate is high
+          Navigator.pushNamed(context, '/unhelthyHigh', arguments: heartRate);
+        } else { // heartrate is good
           Navigator.pushNamed(context, '/healthy', arguments: heartRate);
         }
       }
-    } else { // no heart rate is read, ERROR
+    } else { // no heart rate is read, show an ERROR message
       showDialog(
         context: context,
         builder: (context) {
@@ -101,7 +101,7 @@ class WelcomePage extends StatelessWidget {
             SizedBox(height: 10.0),
           TextField(
             controller: _textController,
-            decoration: InputDecoration(
+            decoration: InputDecoration( // input textbox to get users age
               hintText: 'Enter your age',
               border: const OutlineInputBorder(),
               suffixIcon: 
