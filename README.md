@@ -40,7 +40,7 @@
 
 <p><img src="https://media.discordapp.net/attachments/833554069070938116/1105699368381714472/image.png?width=942&amp;height=866" alt=""></p>
 
-<h2 id="toc_3">Java App</h2>
+<h2 id="toc_3">3. Java App</h2>
 
 <p>The Java app is used to receive the data sent from the ESP32 and write an output file with the heartrate. In order to set this up, you must:</p>
 
@@ -52,7 +52,7 @@
 <li>Run app.java. Your read heartrate should be printed in the terminal along with an output .txt file containing your heartrate.</li>
 </ol>
 
-<h2 id="toc_4">Flutter App</h2>
+<h2 id="toc_4">4. Flutter App</h2>
 
 <p>After the java app outputted a file, we can now use Flutter to run a real mobile application and read the data from this file.</p>
 
