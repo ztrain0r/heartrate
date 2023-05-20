@@ -7,11 +7,11 @@ Table of Contents
 1. Introduction
 2. Installation
 3. Usage
-4. Class Overview
-    4.1 MyApp
-    4.2 WelcomePage
-    4.3 HealthyHeartPage
-    4.4 UnhealthyHeartPageHigh
+4. Class Overview <br />
+    4.1 MyApp <br />
+    4.2 WelcomePage <br />
+    4.3 HealthyHeartPage <br />
+    4.4 UnhealthyHeartPageHigh <br />
     4.5 UnhealthyHeartPageLow
 
 1. Introduction

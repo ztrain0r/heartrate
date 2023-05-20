@@ -3,3 +3,5 @@ ESP32Monitor/.vscode/extensions.json
 ESP32Monitor/.vscode/settings.json
 ESP32Monitor/include/README
 ESP32Monitor/lib/README
+target/classes/com/example/App.class
+*.class
